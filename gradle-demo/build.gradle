@@ -9,7 +9,9 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
+//mainClassName 要加ext前缀
+ext.mainClassName = 'com.TestApplication'
 
 //生成的jar包包名和版本
 jar{
@@ -22,19 +24,31 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
    // mavenCentral()
-  //  maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 }
 
 //设置jdk的版本
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+configurations {
+    providedRuntime
+}
+
+
 //编译时的依赖
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    compile group:'commons-collections',name:'commons-collections',version:'3.2'
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+
+//    compile('org.springframework.boot:spring-boot-starter-web') //必备
+//    compile('org.springframework.boot:spring-boot-starter-thymeleaf') //必备
+//    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+//    compile('org.springframework.boot:spring-boot-starter-test')
+//    compile('org.springframework.boot:spring-boot-starter')
+
+//    compile group:'commons-collections',name:'commons-collections',version:'3.2'
+//    testCompile group: 'junit', name: 'junit', version: '4.+'
+
 }
